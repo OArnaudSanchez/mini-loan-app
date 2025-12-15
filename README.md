@@ -115,7 +115,7 @@ Testing strategy:
 
 Due to time constraints:
 - Authentication and authorization
-- Advanced frontend UX and validations
+- Frontend validations and some components refactor
 - Swagger / OpenAPI documentation
 
 ---
