@@ -1,0 +1,25 @@
+name: .NET Build and Test
+
+on:
+  push:
+    branches: [ "master", "dev" ]
+  pull_request:
+    branches: [ "master", "dev" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: backend/src
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build and Test .NET Solution
+        uses: ./backend/src/.github/actions/dotnet-build-test
+        with:
+          solution: src.sln
+          dotnet_version: '8.0.x'
