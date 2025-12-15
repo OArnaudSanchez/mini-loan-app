@@ -1,0 +1,50 @@
+services:
+  sqlserver:
+    image: mcr.microsoft.com/azure-sql-edge:latest
+    container_name: fundo-sql
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "Loan_TestPassw@rd"
+    ports:
+      - "1433:1433"
+    volumes:
+      - sql_data:/var/opt/mssql
+    healthcheck:
+      test: [
+        "CMD",
+        "/opt/mssql-tools/bin/sqlcmd",
+        "-S",
+        "localhost",
+        "-U",
+        "sa",
+        "-P",
+        "Loan_TestPassw@rd",
+        "-Q",
+        "SELECT 1"
+      ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build:
+      context: .
+      dockerfile: Fundo.Applications.WebApi/Dockerfile
+    container_name: fundo-api
+    depends_on:
+      sqlserver:
+        condition: service_healthy
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ConnectionStrings__LoanDatabase: >
+        Server=sqlserver,1433;
+        Database=FundoLoansDb;
+        User Id=sa;
+        Password=Loan_TestPassw@rd;
+        TrustServerCertificate=True;
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+
+volumes:
+  sql_data:
