@@ -5,16 +5,16 @@ The solution includes a **.NET Web API backend** and a **simplified Angular fron
 
 ---
 
-## 🧱 Architecture Overview
+## Architecture Overview
 
 The backend follows a **Clean Architecture** approach, with clear separation of concerns:
 
 ```
 /src
- ├── Fundo.Applications.Domain         // Domain entities and business rules
- ├── Fundo.Applications.Application    // CQRS, MediatR, validators, DTOs
- ├── Fundo.Applications.Infrastructure // EF Core, repositories (Repository pattern and Unit of work), persistence
- └── Fundo.Applications.WebApi         // API layer (controllers, middleware)
+/src/Fundo.Applications.Domain         // Domain entities and business rules
+/src/Fundo.Applications.Application    // CQRS, MediatR, validators, DTOs
+/src/Fundo.Applications.Infrastructure // EF Core, repositories (Repository pattern and Unit of work), persistence
+/src/Fundo.Applications.WebApi         // API layer (controllers, middleware)
 ```
 
 Key architectural decisions:
@@ -27,7 +27,7 @@ Key architectural decisions:
 
 ---
 
-## 🚀 Running the Project
+## Running the Project
 
 ### Prerequisites
 
@@ -36,7 +36,7 @@ Key architectural decisions:
 - Docker & Docker Compose**
 ---
 
-### ▶️ Run Backend (Local)
+### Run Backend (Local)
 
 ```bash
 cd src/Fundo.Applications.WebApi
@@ -54,7 +54,7 @@ https://localhost:5001
 
 ---
 
-### ▶️ Run Backend with Docker
+### Run Backend with Docker
 
 From the repository root:
 
@@ -68,7 +68,7 @@ This will start:
 
 ---
 
-### ▶️ Run Frontend (Angular)
+### Run Frontend (Angular)
 
 ```bash
 cd frontend
@@ -84,7 +84,7 @@ http://localhost:4200
 
 ---
 
-## 🧪 Running Tests
+## Running Tests
 
 ```bash
 dotnet test
@@ -97,7 +97,7 @@ Testing strategy:
 
 ---
 
-## 🔐 Validation & Error Handling
+## Validation & Error Handling
 
 - Input validation via **FluentValidation**
 - Consistent error responses through a global exception middleware
@@ -106,7 +106,7 @@ Testing strategy:
 
 ---
 
-## 📋 Implemented Features
+## Implemented Features
 
 ### Backend
 - Create loan
@@ -124,12 +124,12 @@ Testing strategy:
 
 ---
 
-## ⚠️ Challenges Faced
+## Challenges Faced
 - Aligning framework versions across projects
 
 ---
 
-## 🚧 Features Not Fully Implemented
+## Features Not Fully Implemented
 
 Due to time constraints:
 - Authentication and authorization
@@ -138,7 +138,7 @@ Due to time constraints:
 
 ---
 
-## 🔮 Possible Improvements
+## Possible Improvements
 
 With additional time:
 - Replace EF Core InMemory with SQLite InMemory for more realistic integration tests
@@ -147,6 +147,6 @@ With additional time:
 - Improve frontend UX and error handling
 - Add pagination and filtering to loan listing
 
-## 📬 Final Notes
+## Final Notes
 
 This project aims to demonstrate solid backend engineering practices, clean architecture principles, and pragmatic testing strategies suitable for real-world applications.
