@@ -1,83 +1,152 @@
-# **Take-Home Test: Backend-Focused Full-Stack Developer (.NET C# & Angular)**
+# Loan Management System – Take-Home Test
 
-## **Objective**
-
-This take-home test evaluates your ability to develop and integrate a .NET Core (C#) backend with an Angular frontend, focusing on API design, database integration, and basic DevOps practices.
-
-## **Instructions**
-
-1.  **Fork the provided repository** before starting the implementation.
-2.  Implement the requested features in your forked repository.
-3.  Once you have completed the implementation, **send the link** to your forked repository via email for review.
-
-## **Task**
-
-You will build a simple **Loan Management System** with a **.NET Core backend (C#)** exposing RESTful APIs and a **basic Angular frontend** consuming these APIs.
+This repository contains the implementation of a **Loan Management System**, developed woth .NET.  
+The solution includes a **.NET Web API backend** and a **simplified Angular frontend**, with a focus on clean architecture, testability, and maintainability.
 
 ---
 
-## **Requirements**
+## 🧱 Architecture Overview
 
-### **1. Backend (API) - .NET Core**
+The backend follows a **Clean Architecture** approach, with clear separation of concerns:
 
-* Create a **RESTful API** in .NET Core to handle **loan applications**.
-* Implement the following endpoints:
-    * `POST /loans` → Create a new loan.
-    * `GET /loans/{id}` → Retrieve loan details.
-    * `GET /loans` → List all loans.
-    * `POST /loans/{id}/payment` → Deduct from `currentBalance`.
-* Loan example (feel free to improve it):
+```
+/src
+ ├── Fundo.Applications.Domain         // Domain entities and business rules
+ ├── Fundo.Applications.Application    // CQRS, MediatR, validators, DTOs
+ ├── Fundo.Applications.Infrastructure // EF Core, repositories (Repository pattern and Unit of work), persistence
+ └── Fundo.Applications.WebApi         // API layer (controllers, middleware)
+```
 
-    ```json
-    {
-        "amount": 1500.00, // Amount requested
-        "currentBalance": 500.00, // Remaining balance
-        "applicantName": "Maria Silva", // User name
-        "status": "active" // Status can be active or paid
-    }
-    ```
-
-* Use **Entity Framework Core** with **SQL Server**.
-* Create seed data to populate the loans (the frontend will consume this).
-* Write **unit/integration tests for the API** (xUnit or NUnit).
-* **Dockerize** the backend and create a **Docker Compose** file.
-* Create a README with setup instructions.
-
-### **2. Frontend - Angular (Simplified UI)**  
-
-Develop a **lightweight Angular app** to interact with the backend
-
-#### **Features:**  
-- A **table** to display a list of existing loans.  
-
-#### **Mockup:**  
-[View Mockup](https://kzmgtjqt0vx63yji8h9l.lite.vusercontent.net/)  
-(*The design doesn’t need to be an exact replica of the mockup—it serves as a reference. Aim to keep it as close as possible.*)  
+Key architectural decisions:
+- CQRS with **MediatR**
+- **Entity Framework Core** for persistence
+- **FluentValidation** for request validation
+- **AutoMapper** for entity-to-DTO mapping
+- Global exception handling middleware
+- Unit and integration testing with **xUnit**
 
 ---
 
-## **Bonus (Optional, Not Required)**
+## 🚀 Running the Project
 
-* **Improve error handling and logging** with structured logs.
-* Implement **authentication**.
-* Create a **GitHub Actions** pipeline for building and testing the backend.
+### Prerequisites
+
+- .NET SDK **8.0+**
+- Node.js **20.x (LTS)**
+- Docker & Docker Compose**
+---
+
+### ▶️ Run Backend (Local)
+
+```bash
+cd src/Fundo.Applications.WebApi
+dotnet restore
+dotnet run
+```
+
+The API will be available at:
+
+```
+https://localhost:5001
+```
+
+> In **Development** environment, EF Core migrations are applied automatically and seed data is generated.
 
 ---
 
-## **Evaluation Criteria**
+### ▶️ Run Backend with Docker
 
-✔ **Code quality** (clean architecture, modularization, best practices).
+From the repository root:
 
-✔ **Functionality** (the API and frontend should work as expected).
+```bash
+docker-compose up --build
+```
 
-✔ **Security considerations** (authentication, validation, secure API handling).
-
-✔ **Testing coverage** (unit tests for critical backend functions).
-
-✔ **Basic DevOps implementation** (Docker for backend).
+This will start:
+- The Web API
+- SQL Server (containerized)
 
 ---
 
-## **Additional Information**
+### ▶️ Run Frontend (Angular)
 
-Candidates are encouraged to include a `README.md` file in their repository detailing their implementation approach, any challenges they faced, features they couldn't complete, and any improvements they would make given more time. Ideally, the implementation should be completed within **two days** of starting the test.
+```bash
+cd frontend
+npm install
+npm start
+```
+
+The frontend will be available at:
+
+```
+http://localhost:4200
+```
+
+---
+
+## 🧪 Running Tests
+
+```bash
+dotnet test
+```
+
+Testing strategy:
+- Unit tests for application layer handlers and domain logic
+- Integration tests for API endpoints using `WebApplicationFactory`
+- Integration tests use **EF Core InMemory** to avoid external dependencies
+
+---
+
+## 🔐 Validation & Error Handling
+
+- Input validation via **FluentValidation**
+- Consistent error responses through a global exception middleware
+- Clear separation between validation errors, domain errors, and unexpected failures
+- Explicit CORS configuration
+
+---
+
+## 📋 Implemented Features
+
+### Backend
+- Create loan
+- Retrieve loan by ID
+- List all loans
+- Apply payments
+- Seed data for development
+- Dockerized backend
+- Structured logging
+- Unit and integration tests
+
+### Frontend
+- Display list of loans
+- Basic interaction with backend API
+
+---
+
+## ⚠️ Challenges Faced
+- Aligning framework versions across projects
+
+---
+
+## 🚧 Features Not Fully Implemented
+
+Due to time constraints:
+- Authentication and authorization
+- Advanced frontend UX and validations
+- Swagger / OpenAPI documentation
+
+---
+
+## 🔮 Possible Improvements
+
+With additional time:
+- Replace EF Core InMemory with SQLite InMemory for more realistic integration tests
+- Add Swagger/OpenAPI documentation
+- Implement authentication and authorization
+- Improve frontend UX and error handling
+- Add pagination and filtering to loan listing
+
+## 📬 Final Notes
+
+This project aims to demonstrate solid backend engineering practices, clean architecture principles, and pragmatic testing strategies suitable for real-world applications.
