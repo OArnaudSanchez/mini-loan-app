@@ -36,24 +36,6 @@ Key architectural decisions:
 - Docker & Docker Compose**
 ---
 
-### Run Backend (Local)
-
-```bash
-cd src/Fundo.Applications.WebApi
-dotnet restore
-dotnet run
-```
-
-The API will be available at:
-
-```
-https://localhost:5001
-```
-
-> In **Development** environment, EF Core migrations are applied automatically and seed data is generated.
-
----
-
 ### Run Backend with Docker
 
 From the repository root:
