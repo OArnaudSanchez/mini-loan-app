@@ -111,24 +111,6 @@ Testing strategy:
 
 ---
 
-## Features Not Fully Implemented
-
-Due to time constraints:
-- Authentication and authorization
-- Frontend validations and some components refactor
-- Swagger / OpenAPI documentation
-
----
-
-## Possible Improvements
-
-With additional time:
-- Replace EF Core InMemory with SQLite InMemory for more realistic integration tests
-- Add Swagger/OpenAPI documentation
-- Implement authentication and authorization
-- Improve frontend UX and error handling
-- Add pagination and filtering to loan listing
-
 ## Final Notes
 
 This project aims to demonstrate solid backend engineering practices, clean architecture principles, and pragmatic testing strategies suitable for real-world applications.
