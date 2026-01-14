@@ -103,14 +103,3 @@ Testing strategy:
 ### Frontend
 - Display list of loans
 - Basic interaction with backend API
-
----
-
-## Challenges Faced
-- Aligning framework versions across projects
-
----
-
-## Final Notes
-
-This project aims to demonstrate solid backend engineering practices, clean architecture principles, and pragmatic testing strategies suitable for real-world applications.
